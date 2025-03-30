@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
         try {
             // Make the request to fetch books based on the selected filters
-            const response = await fetch(`http://localhost:3000/api/books?seed=${seed}&numBooks=10&page=${page}&region=${region}&likes=${likes}&reviews=${reviews}`);
+            const response = await fetch(`https://task-5-itransition-aninda.onrender.com/api/books?seed=${seed}&numBooks=10&page=${page}&region=${region}&likes=${likes}&reviews=${reviews}`);
             
             if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
 
