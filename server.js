@@ -2,7 +2,7 @@ const express = require('express');
 const { fakerDE, fakerFR, fakerEN } = require('@faker-js/faker');
 const cors = require('cors');
 const app = express();
-const PORT =  3000; 
+const PORT = process.env.PORT || 3000;  // Set PORT to Render's PORT or fallback to 3000
 
 const localeFakers = {
     'en': fakerEN,
@@ -84,6 +84,6 @@ app.get('/api/books', (req, res) => {
 });
 
 // Start the server
-app.listen(port, () => {
-    console.log(`Server running at http://localhost:${port}`);
+app.listen(PORT, () => {
+    console.log(`Server running at http://localhost:${PORT}`);
 });
