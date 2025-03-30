@@ -1,7 +1,6 @@
 const express = require('express');
 const { fakerDE, fakerFR, fakerEN } = require('@faker-js/faker');
 const cors = require('cors');
-
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -21,7 +20,7 @@ const generateBooks = (locale, seed, numBooks, likes, reviews, page) => {
     return Array.from({ length: numBooks }, (_, i) => ({
         index: (page - 1) * numBooks + (i + 1),
         isbn: faker.number.int({ min: 1000000000000, max: 9999999999999 }).toString(),
-        title: faker.commerce.productName(3),
+        title: faker.commerce.productName(3), // More realistic book titles
         author: faker.person.fullName(2),
         publisher: faker.company.name(2),
         likes: parseFloat(faker.number.float({ min: 0, max: likes }).toFixed(1)),
@@ -58,5 +57,5 @@ app.get('/api/books', (req, res) => {
 
 // Start the server
 app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
+    console.log(`Server running at Port:${PORT}`);
 });
