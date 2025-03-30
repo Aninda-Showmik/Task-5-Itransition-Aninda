@@ -154,6 +154,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Event listeners for changing filters and inputs
     document.getElementById("likes-slider").addEventListener("input", () => {
-        document.getElementById("likes-value").innerText
+        document.getElementById("likes-value").innerText = document
 ::contentReference[oaicite:0]{index=0}
  
