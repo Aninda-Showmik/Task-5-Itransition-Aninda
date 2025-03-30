@@ -150,6 +150,10 @@ document.addEventListener("DOMContentLoaded", function() {
         clearTimeout(timeoutId);
         timeoutId = setTimeout(() => fetchBooks(true), 300); // Apply changes after a short delay
     });
+    let reviews = parseFloat(document.getElementById("reviews-input").value);
+    if (isNaN(reviews) || reviews < 0 || reviews > 5) {
+    reviews = 5; // Set a default value if the input is empty or invalid
+        }
 
     document.getElementById("region").addEventListener("change", () => fetchBooks(true));
 
