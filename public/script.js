@@ -1,64 +1,44 @@
 document.addEventListener("DOMContentLoaded", function() {
     let page = 1;
     let loading = false;
-    let view = 'table'; // Default view is table
+    let view = 'table';
     let timeoutId;
     let retryCount = 0;
-    const maxRetries = 3; // Maximum retries before showing a persistent error
-
-    // Function to determine the base URL based on the environment
-    function getBaseUrl() {
-        if (window.location.hostname === 'localhost') {
-            // Local development
-            return 'http://localhost:3000/api/books';
-        } else {
-            // Production (Vercel)
-            return `https://${window.location.hostname}/api/books`;
-        }
-    }
+    const maxRetries = 3;
 
     // Function to fetch books from the API
     async function fetchBooks(reset = false) {
         if (loading) return;
         loading = true;
 
-        // Get the seed value (either manually entered or random)
         const seedInput = document.getElementById("seed").value;
         const seed = (seedInput && !isNaN(seedInput) && seedInput.trim() !== "") ? parseInt(seedInput, 10) : Math.floor(Math.random() * 10000);
-
-        // Other filter values
         const region = document.getElementById("region").value;
-        const likes = 5; // Default value for likes
-        const reviews = 5; // Default value for reviews
+        const likes = parseFloat(document.getElementById("likes-slider").value);
+        const reviews = parseFloat(document.getElementById("reviews-input").value);
 
-        // Reset page and views if needed
         if (reset) {
             document.getElementById("bookTableBody").innerHTML = "";
             document.getElementById("galleryView").innerHTML = "";
             page = 1;
-            retryCount = 0; // Reset retry count
+            retryCount = 0;
         }
 
-        // Show loading indicator
         document.getElementById("loadingIndicator").style.display = "block";
         document.getElementById("errorMessage").style.display = "none";
 
         try {
-            // Make the request to fetch books based on the selected filters
-            const response = await fetch(`${getBaseUrl()}?seed=${seed}&numBooks=10&page=${page}&region=${region}&likes=${likes}&reviews=${reviews}`);
-            
+            const response = await fetch(`https://task-5-itransition-aninda.onrender.com/api/books?seed=${seed}&numBooks=10&page=${page}&region=${region}&likes=${likes}&reviews=${reviews}`);
             if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
 
             const data = await response.json();
             const books = data.books;
 
-            // Clear previous data if reset is requested
             if (reset) {
                 document.getElementById("bookTableBody").innerHTML = "";
                 document.getElementById("galleryView").innerHTML = "";
             }
 
-            // Render books based on the selected view (table or gallery)
             if (view === 'table') {
                 document.getElementById("galleryView").style.display = 'none';
                 document.getElementById("bookTable").style.display = 'table';
@@ -93,7 +73,28 @@ document.addEventListener("DOMContentLoaded", function() {
                 });
             }
 
-            page++; // Increment page for infinite scrolling
-           
-::contentReference[oaicite:0]{index=0}
- 
+            page++;
+            retryCount = 0;
+        } catch (error) {
+            retryCount++;
+            document.getElementById("errorMessage").innerText = `Error: ${error.message}`;
+            document.getElementById("errorMessage").style.display = "block";
+            if (retryCount < maxRetries) {
+                document.getElementById("errorMessage").innerHTML += '<button onclick="fetchBooks(true)">Retry</button>';
+            } else {
+                document.getElementById("errorMessage").innerHTML += '<p>Please check your internet connection or try again later.</p>';
+            }
+            setTimeout(() => {
+                document.getElementById("errorMessage").style.display = "none";
+            }, 5000);
+        } finally {
+            loading = false;
+            document.getElementById("loadingIndicator").style.display = "none";
+        }
+    }
+
+    // Additional functions and event listeners go here...
+
+    // Initial call to load books
+    fetchBooks(true);
+});
