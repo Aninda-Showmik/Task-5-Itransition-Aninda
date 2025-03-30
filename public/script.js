@@ -20,7 +20,12 @@ document.addEventListener("DOMContentLoaded", function() {
         // Other filter values
         const region = document.getElementById("region").value;
         const likes = parseFloat(document.getElementById("likes-slider").value);
-        const reviews = parseFloat(document.getElementById("reviews-input").value);
+
+        // Get reviews value, ensuring it's valid (if empty, default to 5 or any other valid value)
+        let reviews = parseFloat(document.getElementById("reviews-input").value);
+        if (isNaN(reviews) || reviews < 0 || reviews > 5) {
+            reviews = 5; // Set a default value if the input is empty or invalid
+        }
 
         // Reset page and views if needed
         if (reset) {
@@ -35,8 +40,11 @@ document.addEventListener("DOMContentLoaded", function() {
         document.getElementById("errorMessage").style.display = "none";
 
         try {
+            // Construct the API URL using the VERCEL_URL environment variable
+            const apiUrl = `https://${process.env.VERCEL_URL}/api/books`;
+
             // Make the request to fetch books based on the selected filters
-            const response = await fetch(`https://task-5-itransition-aninda.onrender.com/api/books?seed=${seed}&numBooks=10&page=${page}&region=${region}&likes=${likes}&reviews=${reviews}`);
+            const response = await fetch(`${apiUrl}?seed=${seed}&numBooks=10&page=${page}&region=${region}&likes=${likes}&reviews=${reviews}`);
             
             if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
 
@@ -128,48 +136,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Event listener for closing the book details modal
     document.querySelector("#book-details button").addEventListener("click", function() {
-        document.getElementById("book-details").style.display = "none";
-    });
-
-    // Event listener for random seed button
-    document.getElementById("randomSeedButton").addEventListener("click", () => {
-        const randomSeed = Math.floor(Math.random() * 10000);
-        document.getElementById("seed").value = randomSeed; // Update the seed input field
-        fetchBooks(true); // Fetch books with the new random seed
-    });
-
-    // Event listeners for changing filters and inputs
-    document.getElementById("likes-slider").addEventListener("input", () => {
-        document.getElementById("likes-value").innerText = document.getElementById("likes-slider").value;
-        clearTimeout(timeoutId);
-        timeoutId = setTimeout(() => fetchBooks(true), 300); // Apply changes after a short delay
-    });
-
-    document.getElementById("reviews-input").addEventListener("input", () => {
-        document.getElementById("reviews-value").innerText = document.getElementById("reviews-input").value;
-        clearTimeout(timeoutId);
-        timeoutId = setTimeout(() => fetchBooks(true), 300); // Apply changes after a short delay
-    });
-
-    document.getElementById("region").addEventListener("change", () => fetchBooks(true));
-
-    document.getElementById("tableViewButton").addEventListener("click", () => setView('table'));
-    document.getElementById("galleryViewButton").addEventListener("click", () => setView('gallery'));
-
-    // Infinite scrolling functionality
-    document.addEventListener("scroll", () => {
-        if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 100) {
-            fetchBooks(); // Fetch more books as user scrolls to the bottom
-        }
-    });
-
-    // Event listener for seed input field
-    document.getElementById("seed").addEventListener("input", function() {
-        const seedInput = document.getElementById("seed").value;
-        console.log("Seed input changed to:", seedInput);
-        fetchBooks(true); // Fetch books with the updated seed value
-    });
-
-    // Initial call to load books when the page is loaded
-    fetchBooks(true);
-});
+        document.getElementById("book-details").style.display = "none
+::contentReference[oaicite:6]{index=6}
+ 
