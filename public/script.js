@@ -6,10 +6,16 @@ document.addEventListener("DOMContentLoaded", function() {
     let retryCount = 0;
     const maxRetries = 3; // Maximum retries before showing a persistent error
 
-    // Get the base URL dynamically based on environment
-    const baseUrl = window.location.hostname.includes("vercel.app") 
-        ? `https://${window.location.hostname}/api/books` // For production on Vercel
-        : "http://localhost:3000/api/books"; // For local development
+    // Function to determine the base URL based on the environment
+    function getBaseUrl() {
+        if (window.location.hostname === 'localhost') {
+            // Local development
+            return 'http://localhost:3000/api/books';
+        } else {
+            // Production (Vercel)
+            return `https://${window.location.hostname}/api/books`;
+        }
+    }
 
     // Function to fetch books from the API
     async function fetchBooks(reset = false) {
@@ -44,7 +50,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
         try {
             // Make the request to fetch books based on the selected filters
-            const response = await fetch(`${baseUrl}?seed=${seed}&numBooks=10&page=${page}&region=${region}&likes=${likes}&reviews=${reviews}`);
+            const response = await fetch(`${getBaseUrl()}?seed=${seed}&numBooks=10&page=${page}&region=${region}&likes=${likes}&reviews=${reviews}`);
             
             if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
 
@@ -148,36 +154,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Event listeners for changing filters and inputs
     document.getElementById("likes-slider").addEventListener("input", () => {
-        document.getElementById("likes-value").innerText = document.getElementById("likes-slider").value;
-        clearTimeout(timeoutId);
-        timeoutId = setTimeout(() => fetchBooks(true), 300); // Apply changes after a short delay
-    });
-
-    // Updated reviews input event listener to handle manual input and slider
-    document.getElementById("reviews-input").addEventListener("input", () => {
-        document.getElementById("reviews-value").innerText = document.getElementById("reviews-input").value;
-        clearTimeout(timeoutId);
-        timeoutId = setTimeout(() => fetchBooks(true), 300); // Apply changes after a short delay
-    });
-
-    document.getElementById("region").addEventListener("change", () => fetchBooks(true));
-
-    document.getElementById("tableViewButton").addEventListener("click", () => setView('table'));
-    document.getElementById("galleryViewButton").addEventListener("click", () => setView('gallery'));
-
-    // Infinite scrolling functionality
-    document.addEventListener("scroll", () => {
-        if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 100) {
-            fetchBooks(); // Fetch more books as user scrolls to the bottom
-        }
-    });
-
-    // Event listener for seed input field
-    document.getElementById("seed").addEventListener("input", function() {
-        const seedInput = document.getElementById("seed").value;
-        fetchBooks(true); // Fetch books with the updated seed value
-    });
-
-    // Initial call to load books when the page is loaded
-    fetchBooks(true);
-});
+        document.getElementById("likes-value").innerText
+::contentReference[oaicite:0]{index=0}
+ 
