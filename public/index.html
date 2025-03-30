@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bookstore Test Generator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Bookstore Test Generator</h1>
+
+    <label for="region">Region:</label>
+    <select id="region">
+        <option value="en">English (USA)</option>
+        <option value="de">German (Germany)</option>
+        <option value="fr">French (France)</option>
+    </select>
+
+    <label for="seed">Seed:</label>
+    <input type="number" id="seed" value="1234">
+    
+    <button id="randomSeedButton">🔀 Random Seed</button>
+
+    <div class="likes-slider-container">
+        <label for="likes-slider">Average Likes Per Book:</label>
+        <input type="range" id="likes-slider" name="likes" min="0" max="10" step="0.1" value="5">
+        <span id="likes-value">5</span>
+    </div>
+
+    <div>
+        <label for="reviews-input">Average Reviews Per Book:</label>
+        <input type="number" id="reviews-input" name="reviews" min="0" max="5" step="0.1" value="5">
+        <span id="reviews-value">5</span>
+    </div>
+
+    <div>
+        <button id="tableViewButton">Table View</button>
+        <button id="galleryViewButton">Gallery View</button>
+    </div>
+
+    <table id="bookTable" style="display: none;">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>ISBN</th>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Publisher</th>
+                <th>Likes</th>
+                <th>Reviews</th>
+            </tr>
+        </thead>
+        <tbody id="bookTableBody"></tbody>
+    </table>
+
+    <div id="galleryView" style="display: none;"></div>
+
+    <!-- Book Details Modal/Container -->
+    <div id="book-details">
+        <h2>Book Details</h2>
+        <div id="book-detail-content"></div>
+        <button>Close</button>
+    </div>
+
+    <div id="loadingIndicator" style="display: none;">Loading...</div>
+    <div id="errorMessage" style="display: none; color: red;"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>

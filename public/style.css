@@ -1,0 +1,200 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    padding: 0;
+    background-color: #f5f5f5;
+    text-align: center;
+}
+
+h1 {
+    color: #333;
+}
+
+label {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+input, select, button {
+    margin: 5px;
+    padding: 8px;
+    font-size: 14px;
+}
+
+button {
+    cursor: pointer;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+table {
+    width: 90%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    background-color: white;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #007BFF;
+    color: white;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tbody tr:hover {
+    background-color: #ddd;
+}
+
+#galleryView {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+.book-card {
+    border: 1px solid #ddd;
+    padding: 20px;
+    background-color: white;
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.book-card h3 {
+    font-size: 18px;
+    color: #333;
+}
+
+.book-card p {
+    font-size: 14px;
+    color: #555;
+}
+
+#loadingIndicator, #errorMessage {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#errorMessage {
+    color: red;
+}
+#book-details {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    border: 1px solid #ddd; /* Lighter border */
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Slightly stronger shadow */
+    z-index: 1000;
+    border-radius: 8px; /* Rounded corners */
+    width: 350px; /* Adjust width as needed */
+    max-width: 90%; /* Responsive max width */
+}
+
+#book-details h2 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: #333; /* Darker heading */
+    border-bottom: 1px solid #eee; /* Light divider */
+    padding-bottom: 10px;
+}
+
+#book-details button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    cursor: pointer;
+    background-color: #007bff; /* Blue button */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+#book-details button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+#book-detail-content {
+    margin-bottom: 15px;
+}
+
+#book-detail-content p {
+    margin: 8px 0;
+    color: #555; /* Slightly darker text */
+    line-height: 1.6;
+}
+
+#book-detail-content strong {
+    font-weight: 600; /* Semi-bold for labels */
+    color: #333;
+    margin-right: 5px;
+}
+
+.likes-slider-container {
+    display: flex;
+    align-items: center;
+    margin: 20px auto;
+    width: 400px; /* Increase container width if needed */
+}
+
+.likes-slider-container label {
+    margin-right: 15px;
+    font-weight: 600;
+    min-width: 180px; /* Increase label width */
+    color: #333;
+    white-space: nowrap; /* Prevent line wrapping */
+}
+
+.likes-slider-container input[type="range"] {
+    flex-grow: 1;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 10px;
+    background: #e6dfdf;
+    border: 2px solid rgb(243, 189, 189);
+    border-radius: 5px;
+    outline: none;
+    margin: 0 5px;
+}
+
+.likes-slider-container input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    background: #007bff;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    border: 2px solid white;
+}
+
+.likes-slider-container span {
+    width: 40px;
+    text-align: right;
+    font-weight: 500;
+    color: #333;
+}
